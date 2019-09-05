@@ -22,7 +22,8 @@ class App extends Component {
       //     id: '003'
       //   },
       // ],
-      tracks:[]
+      tracks:[],
+      search: ''
     };
   }
 
@@ -36,6 +37,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <input type='search' placeholder='search' onChange={e => {
+        this.setState({ searchField: e.target.value}, () => console.log(this.state));
+      }} 
+      />
       <CardList tracks={this.state.tracks}>
 
       </CardList>
