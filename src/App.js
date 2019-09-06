@@ -35,10 +35,11 @@ class App extends Component {
   }
 
   render() {
+    // destructuring 
     return (
       <div className="App">
-      <input type='search' placeholder='search' onChange={e => {
-        this.setState({ searchField: e.target.value}, () => console.log(this.state));
+      <input type='search' placeholder='search' onChange={a => {
+        this.setState({ searchField: a.target.value}, () => console.log(this.state));
       }} 
       />
       <CardList tracks={this.state.tracks}>
