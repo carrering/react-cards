@@ -23,7 +23,7 @@ class App extends Component {
       //   },
       // ],
       tracks:[],
-      search: ''
+      searchField: ''
     };
   }
 
@@ -35,14 +35,21 @@ class App extends Component {
   }
 
   render() {
-    // destructuring 
+    // destructure - pull properties from an object and place in constant. 
+    const { tracks, searchField } = this.state;
+    const filteredTracks = tracks.filter(track =>
+      track.name.toLowerCase().includes(searchField.toLowerCase())
+      );
     return (
       <div className="App">
-      <input type='search' placeholder='search' onChange={a => {
-        this.setState({ searchField: a.target.value}, () => console.log(this.state));
+      <input 
+        type='search' 
+        placeholder='search' 
+        onChange={e => {
+        this.setState({ searchField: e.target.value}, () => console.log(this.state));
       }} 
       />
-      <CardList tracks={this.state.tracks}>
+      <CardList tracks={filteredTracks}>
 
       </CardList>
 
