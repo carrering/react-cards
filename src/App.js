@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { CardList } from './components/card-list/card-list.component';
-
+import { SearchBox } from './components/search-box/search-box.component';
 class App extends Component {
   constructor() {
     super();
@@ -26,7 +26,7 @@ class App extends Component {
       searchField: ''
     };
   }
-
+// Life Cycle method
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
@@ -35,24 +35,19 @@ class App extends Component {
   }
 
   render() {
-    // destructure - pull properties from an object and place in constant. 
-    const { tracks, searchField } = this.state;
-    const filteredTracks = tracks.filter(track =>
+   // destructure - pull properties from an object and place in constant. 
+    const {  tracks, searchField } = this.state;
+    const filteredTracks = tracks.filter(track => 
       track.name.toLowerCase().includes(searchField.toLowerCase())
-      );
-    return (
+    );
+     return (
       <div className="App">
-      <input 
-        type='search' 
-        placeholder='search' 
-        onChange={e => {
-        this.setState({ searchField: e.target.value}, () => console.log(this.state));
-      }} 
+      <SearchBox 
+        placeholder = 'search' 
+        handleChange = {e => 
+          this.setState({ searchField: e.target.value}, () => console.log(this.state))}/>
+      <CardList tracks={filteredTracks} 
       />
-      <CardList tracks={filteredTracks}>
-
-      </CardList>
-
       </div>
     )
   }
