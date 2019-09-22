@@ -35,6 +35,7 @@ class App extends Component {
   }
 
   render() {
+   // destructure - pull properties from an object and place in constant. 
     const {  tracks, searchField } = this.state;
     const filteredTracks = tracks.filter(track => 
       track.name.toLowerCase().includes(searchField.toLowerCase())
@@ -47,7 +48,6 @@ class App extends Component {
           this.setState({ searchField: e.target.value}, () => console.log(this.state))}/>
       <CardList tracks={filteredTracks} 
       />
-
       </div>
     )
   }
