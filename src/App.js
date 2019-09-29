@@ -25,13 +25,26 @@ class App extends Component {
       tracks:[],
       searchField: ''
     };
+
+    //need to bind context of this in constructor without an arrow function
+    //this.handleChange = this.handleChange.bind(this);
   }
-// Life Cycle method
+// Life Cycle methods
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     // .then(users => console.log(users));
     .then(users => this.setState({ tracks:users }));
+  }
+  // if using this then need to bind in constructor
+  // handleChange(e) {
+  //   this.setState({ searchField: e.target.value });
+  // }
+
+  //es6 arrow function with lexicle scoping. includes bind implicitly
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+    console.log(e.target.value);
   }
 
   render() {
@@ -44,8 +57,7 @@ class App extends Component {
       <div className="App">
       <SearchBox 
         placeholder = 'search' 
-        handleChange = {e => 
-          this.setState({ searchField: e.target.value}, () => console.log(this.state))}/>
+        handleChange = {this.handleChange}/>
       <CardList tracks={filteredTracks} 
       />
       </div>
